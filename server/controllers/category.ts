@@ -1,6 +1,8 @@
 import {Request, Response} from "express";
 
-export const getAll = (req: Request, res: Response) => {}
+export const getAll = (req: Request, res: Response) => {
+    res.json({message: 'Category'})
+}
 
 export const getById = (req: Request, res: Response) => {}
 
