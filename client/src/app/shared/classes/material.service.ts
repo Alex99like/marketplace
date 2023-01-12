@@ -1,6 +1,9 @@
 import {ElementRef} from "@angular/core";
 
 declare var M: {
+  TapTarget: any;
+  Datepicker: any;
+  Tooltip: any;
   Modal: any;
   FloatingActionButton: any;
   toast: (arg0: { html: string }) => void
@@ -11,6 +14,10 @@ export interface MaterialInstance {
   open?(): void
   close?(): void
   destroy?(): void
+}
+
+export interface MaterialDatepicker extends MaterialInstance {
+  date?: Date
 }
 
 export class MaterialService {
@@ -27,6 +34,22 @@ export class MaterialService {
   }
 
   static initModal(ref: ElementRef): MaterialInstance {
-    return  M.Modal.init(ref.nativeElement)
+    return M.Modal.init(ref.nativeElement)
+  }
+
+  static initTooltip(ref: ElementRef): MaterialInstance {
+    return M.Tooltip.init(ref.nativeElement)
+  }
+
+  static initDatepicker(ref: ElementRef, onClose: () => void): MaterialDatepicker {
+    return M.Datepicker.init(ref.nativeElement, {
+      format: 'dd.mm.yyyy',
+      showClearBtn: true,
+      onClose
+    })
+  }
+
+  static initTapTarget(ref: ElementRef): MaterialInstance {
+    return M.TapTarget.init(ref.nativeElement)
   }
 }
